@@ -1,6 +1,8 @@
 # MPI-Music-Soundtrack-Lookup
-By: Gregory Vasquez && Yashab Narang 
-gvasquez11@csu.fullerton.edu && ynara50@gmail.com 
+<h1 align="center">
+  Gregory Vasquez | Yashab Narang
+  gvasquez11@csu.fullerton.edu | ynara50@gmail.com
+</h1> 
 
 This program is written in C++ MPI which processes lines in order to output a value.
 Each line of the 'in.txt' contains a string that represents concatenated musical notes from
