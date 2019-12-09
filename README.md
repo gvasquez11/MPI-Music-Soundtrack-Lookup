@@ -2,7 +2,7 @@
 
 <p align="center">
   Gregory Vasquez | Yashab Narang
-  gvasquez11@csu.fullerton.edu | ynara50@gmail.com
+  <br>gvasquez11@csu.fullerton.edu | ynara50@gmail.com
 </p>
 
 This program is written in C++ MPI which processes lines in order to output a value.
