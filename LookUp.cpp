@@ -24,45 +24,10 @@ class LookUp
 {
 
 public:
-  LookUp(string fileName) //Construcotr to automatically read input fileName
-  {
-    ifstream ifile(fileName);
-    if(ifile.is_open())
-    {
-      Song s;
-      while(getline(cin,s.title, ','))
-      {
-        getline(cin,s.composer, ',');
-        getline(cin,s.movie, ',');
-        getline(cin,s.timeStamp, ',');
-        getline(cin, s.musicTranscription);
-        songVec.push_back(s);
-      }
-    }
-
-  }
-  void display(const vector<Song>& sv)
-  {
-    if(sv.empty())
-        cout << "Error. No Values" << endl;
-    else
-    {
-      for (int i = 0; i < sv.size(); i++)
-      {
-              cout << "Title: " << sv[i].title
-                   << "   Composer: " << sv[i].composer
-                   << "   Movie: " << sv[i].movie
-                   << "   Time Stamp: " << sv[i].timeStamp
-                   << "   Music Transcription: " << sv[i].musicTranscription << endl;
-      }
-    }
-        cout << endl;
-
-  }
-  vector<Song> getSongVec()
-  {
-    return songVec;
-  }
+  LookUp(string fileName); //Construcotr to automatically read input fileName
+  void display(const vector<Song>& sv);
+  void displayTSMT(const vector<Song> & s);
+  vector<Song> getSongVec();
 
 private:
   vector<Song> songVec;
@@ -82,11 +47,71 @@ int main(int argc, char** argv)
   {
     cout << "Rank 0!" << endl;
     LookUp test("data.txt");
-    test.display(test.getSongVec());
+    //test.display(test.getSongVec());
+    test.displayTSMT(test.getSongVec());
   }
   else
     cout << "Not Rank 0!" << endl;
 
   MPI_Finalize();
   return 0;
+}
+
+LookUp::LookUp(string fileName) //Construcotr to automatically read input fileName
+{
+  ifstream ifile(fileName);
+  if(!ifile.is_open())
+  cout << "Failed to open!" << endl;
+
+  string line;
+    Song s;
+    while(getline(ifile, line))
+    {
+      stringstream ss(line);
+      getline(ss, s.title, ',');
+      getline(ss,s.composer, ',');
+      getline(ss,s.movie, ',');
+      getline(ss,s.timeStamp, ',');
+      getline(ss, s.musicTranscription);
+      songVec.push_back(s);
+    }
+
+}
+
+void LookUp::display(const vector<Song>& sv)
+{
+  if(sv.empty())
+      cout << "Error. No Values" << endl;
+  else
+  {
+    for (int i = 0; i < sv.size(); i++)
+    {
+            cout << "Title:" << sv[i].title
+                 << "  Composer:" << sv[i].composer
+                 << "  Movie:" << sv[i].movie
+                 << "  Time Stamp:" << sv[i].timeStamp
+                 << "  Music Transcription:" << sv[i].musicTranscription << endl;
+    }
+  }
+}
+
+void LookUp::displayTSMT(const vector<Song> & s)
+  {
+    if(s.empty())
+        cout << "Error. No Values" << endl;
+    else
+    {
+      for (int i = 0; i < s.size(); i++)
+      {
+              cout << left <<"Title: " << setw(43) <<s[i].title
+                           << "Movie: " << setw(25)<< s[i].movie
+                           <<"Time Stamp: " << setw(20) << left << s[i].timeStamp << endl;
+              //cout << left << setw(10) << "Music Transcription: " << s[i].musicTranscription << endl;
+      }
+    }
+  }
+
+vector<Song> LookUp::getSongVec()
+{
+  return songVec;
 }
