@@ -50,7 +50,7 @@ public:
       for (int i = 0; i < sv.size(); i++)
       {
               cout << "Title: " << sv[i].title
-                   << "   Manufacturer: " << sv[i].composer
+                   << "   Composer: " << sv[i].composer
                    << "   Movie: " << sv[i].movie
                    << "   Time Stamp: " << sv[i].timeStamp
                    << "   Music Transcription: " << sv[i].musicTranscription << endl;
