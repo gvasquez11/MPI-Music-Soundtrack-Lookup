@@ -69,13 +69,24 @@ private:
 
 };
 
-int main()
+int main(int argc, char** argv)
 {
-LookUp test("data.txt");
-test.display(test.getSongVec());
+  MPI_Init(NULL, NULL);
 
+  int size, rank;
+  MPI_Comm_size(MPI_COMM_WORLD, &size);
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  printf("Rank %d"" out of %d processors:\n", rank, size);
 
+  if(rank == 0)
+  {
+    cout << "Rank 0!" << endl;
+    LookUp test("data.txt");
+    test.display(test.getSongVec());
+  }
+  else
+    cout << "Not Rank 0!" << endl;
 
-
-return 0;
+  MPI_Finalize();
+  return 0;
 }
