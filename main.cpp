@@ -23,8 +23,9 @@ int main(int argc, char** argv)
     LookUp test("data.txt");
     //test.display(test.getSongVec());
     //test.displayTSMT(test.getSongVec());
+    test.readIn("in.txt");
+    cout << "The number of songs found in file are: " << test.getNumOfSongs() << endl;
     test.checkSong(test.getSongVec(), test.getInVect());
-    cout << test.getNumOfSongs() << endl;
 
   }
   else
