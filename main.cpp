@@ -22,7 +22,10 @@ int main(int argc, char** argv)
     cout << "Rank 0!" << endl;
     LookUp test("data.txt");
     //test.display(test.getSongVec());
-    test.displayTSMT(test.getSongVec());
+    //test.displayTSMT(test.getSongVec());
+    test.checkSong(test.getSongVec(), test.getInVect());
+    cout << test.getNumOfSongs() << endl;
+
   }
   else
     cout << "Not Rank 0!" << endl;
