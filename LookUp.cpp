@@ -41,7 +41,7 @@ private:
 
 };
 
-LookUp::LookUp(string fileName) //Construcotr to automatically read input fileName
+LookUp::LookUp(string fileName) //Constructor to automatically read input fileName
 {
   ifstream ifile(fileName);
   if(!ifile.is_open())
@@ -112,7 +112,7 @@ void LookUp::checkSong(const vector<Song> & s, const vector<string> & sv)
     for(int j = 0; j < sv.size() ; j++)
     {
     if(s[i].musicTranscription == sv[j])
-    cout << "Line " << i << " is the trancriped song of " << s[i].title << " which can be seen in the movie " << s[i].movie << " at time " << s[i].timeStamp << endl;
+    cout << "Line " << i << " is trancriped song of " << s[i].title << " which is in the movie " << s[i].movie << " at time " << s[i].timeStamp << endl;
     }
   }
 }
