@@ -11,7 +11,7 @@ int main(int argc, char** argv)
 
   MPI_Init(NULL, NULL);
 
-  int size, rank;
+  int size, rank, split;
   string message;
   vector<string> m;
   MPI_Comm_size(MPI_COMM_WORLD, &size);
@@ -29,21 +29,17 @@ int main(int argc, char** argv)
   {
     if(rank == 0)
     {
-      //printf("%d of %d:\n", rank, size-1);
-
-      //LookUp test("data.txt");
       test.readIn("in.txt");
       cout << "The number of songs found in file are: " << test.getNumOfSongs() << endl;
 
-      for(int i = 0; i < size-1; i++)
-      {
-        message = test.getInVect().at(i);
-        MPI_Send(&message[0], message.size()+1, MPI_BYTE, i+1, /*TAG:*/0, MPI_COMM_WORLD);
-      }
-      //test.checkSong(test.getSongVec(), test.getInVect());
-      //cout << test.getInVect().at(3) << endl;
+      //split = ((test.getNumOfSongs())/(size-1));
 
-      //printf("%d of %d Complete!\n", rank, size-1);
+      for(int r = 0; r < size-1; r++)
+      {
+        message = test.getInVect().at(r);
+        MPI_Send(&message[0], message.size()+1, MPI_BYTE, r+1, /*TAG:*/0, MPI_COMM_WORLD);
+      }
+      //cout << test.getInVect().at(3) << endl;
     }
     else
     {
@@ -55,7 +51,7 @@ int main(int argc, char** argv)
       char buf [count];
       //END code
 
-      //Rank 1 to Size MPI Recieves message and adds to vector m to hopefully run with checkSong
+      //MPI Recieves message and adds to vector m to run with checkSong
       MPI_Recv(&buf, count, MPI_BYTE, 0, /*TAG:*/0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
       m.push_back(buf);
 
