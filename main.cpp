@@ -17,11 +17,12 @@ int main(int argc, char** argv)
   MPI_Comm_size(MPI_COMM_WORLD, &size);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
+  LookUp test("data.txt");
   if(rank == 0)
   {
     printf("%d of %d:\n", rank, size-1);
 
-    LookUp test("data.txt");
+    //LookUp test("data.txt");
     test.readIn("in.txt");
     cout << "The number of songs found in file are: " << test.getNumOfSongs() << endl;
 
@@ -52,10 +53,10 @@ int main(int argc, char** argv)
     m.push_back(buf);
 
     //Just to test the vector m (you can comment it later)
-    for (int i = 0; i < m.size(); i++)
-        cout << m[i] << "\n";
+    //for (int i = 0; i < m.size(); i++)
+      //  cout << m[i] << "\n";
 
-    //test.checkSong(test.getSongVec(), m);
+    test.checkSong(test.getSongVec(), m);
 
     printf("%d of %d Complete!\n", rank, size-1);
   }
