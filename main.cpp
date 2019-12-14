@@ -29,17 +29,30 @@ int main(int argc, char** argv)
   {
     if(rank == 0)
     {
+      //printf("%d of %d:\n", rank, size-1);
+
       test.readIn("in.txt");
       cout << "The number of songs found in file are: " << test.getNumOfSongs() << endl;
 
-      //split = ((test.getNumOfSongs())/(size-1));
+      split = (test.getNumOfSongs()/(size-1));
+      cout << "split = " << split << endl;
 
       for(int r = 0; r < size-1; r++)
       {
-        message = test.getInVect().at(r);
+        message = "";
+        for(int s = 0; s < split; s++)
+        {
+          message.append(test.getInVect().at(s+(r*split)));
+          message.append(" ");
+        }
+        cout << "Sending " << message << endl;
         MPI_Send(&message[0], message.size()+1, MPI_BYTE, r+1, /*TAG:*/0, MPI_COMM_WORLD);
       }
+
+      //test.checkSong(test.getSongVec(), test.getInVect());
       //cout << test.getInVect().at(3) << endl;
+
+      //printf("%d of %d Complete!\n", rank, size-1);
     }
     else
     {
@@ -51,9 +64,17 @@ int main(int argc, char** argv)
       char buf [count];
       //END code
 
-      //MPI Recieves message and adds to vector m to run with checkSong
+      //Rank 1 to Size MPI Recieves message and adds to vector m to hopefully run with checkSong
       MPI_Recv(&buf, count, MPI_BYTE, 0, /*TAG:*/0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-      m.push_back(buf);
+
+      char *token = strtok(buf, " ");
+      while (token != NULL)
+      {
+          m.push_back(token);
+          token = strtok(NULL, " ");
+      }
+
+      //m.push_back(buf);
 
       //Just to test the vector m (you can comment it later)
       //for (int i = 0; i < m.size(); i++)

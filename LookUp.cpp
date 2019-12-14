@@ -68,13 +68,13 @@ void LookUp::display(const vector<Song>& sv)
       cout << "Error. No Values" << endl;
   else
   {
-    for (int i = 0; i < sv.size(); i++)
+    for (int di = 0; di < sv.size(); di++)
     {
-            cout << "Title:" << sv[i].title
-                 << "  Composer:" << sv[i].composer
-                 << "  Movie:" << sv[i].movie
-                 << "  Time Stamp:" << sv[i].timeStamp
-                 << "  Music Transcription:" << sv[i].musicTranscription << endl;
+            cout << "Title:" << sv[di].title
+                 << "  Composer:" << sv[di].composer
+                 << "  Movie:" << sv[di].movie
+                 << "  Time Stamp:" << sv[di].timeStamp
+                 << "  Music Transcription:" << sv[di].musicTranscription << endl;
     }
   }
 }
@@ -85,12 +85,12 @@ void LookUp::displayTSMT(const vector<Song> & s)
         cout << "Error. No Values" << endl;
     else
     {
-      for (int i = 0; i < s.size(); i++)
+      for (int dti = 0; dti < s.size(); dti++)
       {
-              cout << left <<"Title: " << setw(43) <<s[i].title
-                           << "Movie: " << setw(25)<< s[i].movie
-                           <<"Time Stamp: " << setw(20) << left << s[i].timeStamp << endl;
-              //cout << left << setw(10) << "Music Transcription: " << s[i].musicTranscription << endl;
+              cout << left <<"Title: " << setw(43) <<s[dti].title
+                           << "Movie: " << setw(25)<< s[dti].movie
+                           <<"Time Stamp: " << setw(20) << left << s[dti].timeStamp << endl;
+              //cout << left << setw(10) << "Music Transcription: " << s[dti].musicTranscription << endl;
       }
     }
   }
@@ -107,12 +107,12 @@ vector<string> LookUp::getInVect()
 
 void LookUp::checkSong(const vector<Song> & s, const vector<string> & sv)
 {
-  for(int i = 0; i < s.size(); i++)
+  for(int ci = 0; ci < s.size(); ci++)
   {
-    for(int j = 0; j < sv.size() ; j++)
+    for(int cj = 0; cj < sv.size() ; cj++)
     {
-    if(s[i].musicTranscription == sv[j])
-    cout << "Line " << i+1 << " is trancriped song of " << s[i].title << " which is in the movie " << s[i].movie << " at time " << s[i].timeStamp << endl;
+    if(s[ci].musicTranscription == sv[cj])
+    cout << "Line " << ci+1 << " is trancriped song of " << s[ci].title << " which is in the movie " << s[ci].movie << " at time " << s[ci].timeStamp << endl;
     }
   }
 }
