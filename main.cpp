@@ -29,13 +29,14 @@ int main(int argc, char** argv)
   {
     if(rank == 0)
     {
-      //printf("%d of %d:\n", rank, size-1);
 
       test.readIn("in.txt");
       cout << "The number of songs found in file are: " << test.getNumOfSongs() << endl;
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+      printf("Process %d of %d successfully read in file, now broadcasting to other processes!\n", rank, size-1);
 
       split = (test.getNumOfSongs()/(size-1));
-      cout << "split = " << split << endl;
+      cout << "Work is being split into " << split  << " songs per process! "<< endl;
 
       for(int r = 0; r < size-1; r++)
       {
@@ -52,7 +53,8 @@ int main(int argc, char** argv)
       //test.checkSong(test.getSongVec(), test.getInVect());
       //cout << test.getInVect().at(3) << endl;
 
-      //printf("%d of %d Complete!\n", rank, size-1);
+      printf("Process %d of %d successfully broadcasted to other processes!\n", rank, size-1);
+      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
     }
     else
     {
@@ -64,8 +66,10 @@ int main(int argc, char** argv)
       char buf [count];
       //END code
 
+
       //Rank 1 to Size MPI Recieves message and adds to vector m to hopefully run with checkSong
       MPI_Recv(&buf, count, MPI_BYTE, 0, /*TAG:*/0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+      printf("Process %d of %d received data, now scanning song information...\n",rank, size-1);
 
       char *token = strtok(buf, " ");
       while (token != NULL)
@@ -79,10 +83,10 @@ int main(int argc, char** argv)
       //Just to test the vector m (you can comment it later)
       //for (int i = 0; i < m.size(); i++)
         //cout << "Rank " << rank << " holds " << m[i] << "\n";
-
+        cout << endl;
       test.checkSong(test.getSongVec(), m);
 
-      //printf("%d of %d Complete!\n", rank, size-1);
+      printf("Prcoess %d of %d successfully scanned the Star Wars Song!\n", rank, size-1);
     }
   }
 
