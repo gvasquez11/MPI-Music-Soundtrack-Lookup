@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 
       test.readIn("in.txt");
       cout << "The number of songs found in file are: " << test.getNumOfSongs() << endl;
-      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
       printf("Process %d of %d successfully read in file, now broadcasting to other processes!\n", rank, size-1);
 
       split = (test.getNumOfSongs()/(size-1));
@@ -46,7 +46,7 @@ int main(int argc, char** argv)
           message.append(test.getInVect().at(s+(r*split)));
           message.append(" ");
         }
-        cout << "Sending " << message << endl;
+        cout << "Sending: " << message << endl;
         MPI_Send(&message[0], message.size()+1, MPI_BYTE, r+1, /*TAG:*/0, MPI_COMM_WORLD);
       }
 
@@ -54,7 +54,7 @@ int main(int argc, char** argv)
       //cout << test.getInVect().at(3) << endl;
 
       printf("Process %d of %d successfully broadcasted to other processes!\n", rank, size-1);
-      cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+
     }
     else
     {
@@ -83,10 +83,11 @@ int main(int argc, char** argv)
       //Just to test the vector m (you can comment it later)
       //for (int i = 0; i < m.size(); i++)
         //cout << "Rank " << rank << " holds " << m[i] << "\n";
-        cout << endl;
+        //cout << endl;
       test.checkSong(test.getSongVec(), m);
 
       printf("Prcoess %d of %d successfully scanned the Star Wars Song!\n", rank, size-1);
+      cout << endl;
     }
   }
 
