@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  This program is written in C++ using MPI which processes lines in order to output a value.
+&emsp;This program is written in C++ using MPI which processes lines in order to output a value.
 Each line of the 'in.txt' contains a string that represents concatenated musical notes from
 famous Star Wars compositions. This program will read in these lines and scan them to determine
 which of these famous Star Wars songs is represented. Once it determines which song it is,
@@ -23,7 +23,7 @@ mpirun -n 4 LookUp<br>
 </p>
 <br>
 <p>
-How to test<br>
+<b>How to test</b><br>
 In the 'in.txt' put the string of any of the songs below and run the commands from above.<br>
 Works for both even and odd amount of songs and splits up the work accordingly.<br>
 Input of n = 1: Process 0 reads the songs and does all the work<br>
@@ -36,6 +36,7 @@ program will not run as expected.
 </p>
 <br>
 <p>
+<b>Current Possible Inputs</b><br>
 Star Wars(Main Theme) - "DDDGDCBAGDCBAGDCBCA"<br>
 Cantina Band - "EEBEC#BED#BEF#""<br>
 Duel of the Fates - "ADADADAG#AAG#AGF#GF#F"<br>
