@@ -4,7 +4,7 @@
   Gregory Vasquez | Yashab Narang
   <br>gvasquez11@csu.fullerton.edu | ynara50@gmail.com &emsp;&emsp;&emsp;&#8201;&#8201;
 </p>
-
+https://github.com/yashabnarang/MPI-Music-Soundtrack-Lookup
 This program is written in C++ MPI which processes lines in order to output a value.
 Each line of the 'in.txt' contains a string that represents concatenated musical notes from
 famous Star Wars compositions. This program will read in these lines and scan them to determine
@@ -28,7 +28,7 @@ Input of n = 3 or more: Process 0 read the songs and process 2 and 3 splits the 
 Limitations: Program works only with the songs provided below.
 If there's an odd number then processes 1 takes a heavier load of songs and then splits
 the others evenly between the other processes. If the number of processes is greater than the amount of songs
-program will not run as expected. 
+program will not run as expected.
 
 Star Wars(Main Theme) - "DDDGDCBAGDCBAGDCBCA"
 Cantina Band - "EEBEC#BED#BEF#""
