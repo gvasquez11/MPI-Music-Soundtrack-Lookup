@@ -112,7 +112,7 @@ void LookUp::checkSong(const vector<Song> & s, const vector<string> & sv)
     for(int cj = 0; cj < sv.size() ; cj++)
     {
     if(s[ci].musicTranscription == sv[cj])
-    cout << "Song " <<cj +1 <<" read by process is the trancriped song of " << s[ci].title << " which is in the movie " << s[ci].movie << " at time " << s[ci].timeStamp << endl;
+    cout << "Song read: " << s[ci].musicTranscription <<  " Trancriped song of " << s[ci].title << " which is in the movie " << s[ci].movie << " at time " << s[ci].timeStamp << endl;
     }
   }
 }

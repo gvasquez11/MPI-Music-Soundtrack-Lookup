@@ -3,3 +3,5 @@ Cantina Band,John Williams & London Symphony Orchestra,A New Hope,00:44:50,EEBEC
 Duel of the Fates,John Williams & London Symphony Orchestra,The Phantom Menace,01:50:24,ADADADAG#AAG#AGF#GF#F
 Rey's Theme,John Williams,The Force Awakens,00:11:22,ACAAACAEGEACAAACAEGEA
 The Imperial March (Darth Vader's Theme),John Williams & London Symphony Orchestra,The Empire Strikes Back,00:19:43,GGGEbBbGEbBbGDDDEbBbGbEbBbGEbBbG
+Anakin vs Obi, John Williams, The Revenge of the Sith,01:47:55,DDDDDDDDDDDDDEFFECED
+The Imperial Suite, John William & the London Symphony, Rouge One, 00:21:51,FFFFFFFFFFFFFFAbFAbCCDb

@@ -35,21 +35,64 @@ int main(int argc, char** argv)
 
       printf("Process %d of %d successfully read in file, now broadcasting to other processes!\n", rank, size-1);
 
-      split = (test.getNumOfSongs()/(size-1));
-      cout << "Work is being split into " << split  << " songs per process! "<< endl;
-
-      for(int r = 0; r < size-1; r++)
+      // if number of songs in input is odd, we want to send one to process one
+      // to make split work well with as int
+      if(test.getNumOfSongs() % 2 == 1)
       {
+        int re = (test.getNumOfSongs() % (size-1));
+        split = (test.getNumOfSongs()/(size-1));
+
+        cout << "Work is being split into " << split + re  << " for process 1 and " << split << " for other processes! "<< endl;
+
         message = "";
-        for(int s = 0; s < split; s++)
+        for(int u = 0; u < re; u++)
         {
-          message.append(test.getInVect().at(s+(r*split)));
+
+          message.append(test.getInVect().at(u));
           message.append(" ");
         }
-        cout << "Sending: " << message << endl;
-        MPI_Send(&message[0], message.size()+1, MPI_BYTE, r+1, /*TAG:*/0, MPI_COMM_WORLD);
+          //message = (test.getInVect().at(0));
+          //message.append(" ");
+            //cout << "Sending: " << message << endl;
+            //MPI_Send(&message[0], message.size()+1, MPI_BYTE, 1, /*TAG:*/0, MPI_COMM_WORLD)
+
+            for(int p = 0; p < split; p++)
+            {
+              message.append(test.getInVect().at(p+re));
+              message.append(" ");
+            }
+            cout << "Sending: " << message << endl;
+            MPI_Send(&message[0], message.size()+1, MPI_BYTE, 1, /*TAG:*/0, MPI_COMM_WORLD);
+          for(int r = 1; r < size-1; r++)
+          {
+            message = "";
+            for(int s = 0; s < split; s++)
+            {
+              message.append(test.getInVect().at(re+s+(r*split)));
+              message.append(" ");
+            }
+            cout << "Sending: " << message << endl;
+            MPI_Send(&message[0], message.size()+1, MPI_BYTE, r+1, /*TAG:*/0, MPI_COMM_WORLD);
+          }
       }
 
+      else
+      {
+        split = (test.getNumOfSongs()/(size-1));
+        cout << "Work is being split into " << split  << " songs per process! "<< endl;
+
+        for(int r = 0; r < size-1; r++)
+        {
+          message = "";
+          for(int s = 0; s < split; s++)
+          {
+            message.append(test.getInVect().at(s+(r*split)));
+            message.append(" ");
+          }
+          cout << "Sending: " << message << endl;
+          MPI_Send(&message[0], message.size()+1, MPI_BYTE, r+1, /*TAG:*/0, MPI_COMM_WORLD);
+        }
+      }
       //test.checkSong(test.getSongVec(), test.getInVect());
       //cout << test.getInVect().at(3) << endl;
 
